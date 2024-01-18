@@ -5,4 +5,4 @@ const isValid = (email,password) => {
     if(!passwordRegex)return "Password is not Valid"
     return (null);
 }
-export default isValid;
+export default isValid; 

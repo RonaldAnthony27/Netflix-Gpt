@@ -2,11 +2,14 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
 import isValid from "../utils/SignInValidation";
-import { createUserWithEmailAndPassword,signInWithEmailAndPassword,updateProfile } from "firebase/auth";
-import {auth} from "../utils/firebase"
 import { useNavigate } from "react-router-dom";
-import { addUser } from "../utils/userSlice"
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword,updateProfile} from "firebase/auth";
+import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
+import { addUser } from "../utils/userSlice";
+
+
+
 
 
 
@@ -18,66 +21,74 @@ const Login = () => {
     const name=useRef(null);
     const [isSignIn, setIsSignIn] = useState(true);
     const [errorMsg, setErrorMsg] = useState(null);
+
     function toggleSignIn() {
         setIsSignIn(!isSignIn);
     }
     const handleClick = () => {
         const msg = isValid(email.current.value, password.current.value);
         setErrorMsg(msg)
-        if (msg) return; // if error return the user rom logging in
+        if (msg) {
+            return; // if error return the user rom logging in
         
+        }
         // SignUp Logic
         if (!isSignIn) {
             createUserWithEmailAndPassword(auth,email.current.value, password.current.value)
-            .then((userCredential) => {
-                 // Signed up 
-                const user = userCredential.user;
-                console.log(user);
-               
-               // Updating user Profile
-                updateProfile(user, {
-                    displayName: name.current.value, photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxRWsUV2-8W5E0tSmHMxiulei8obW1ilGB_A&usqp=CAU"
-                  }).then(() => {
-                      // Profile updated!
-                      const { uid, email, displayName ,photoURL} = auth.currentUser;
-                dispatch(addUser({ uid: uid, email: email, displayName: displayName, photoURL:photoURL }));
-              
-                      navigate("/Browse")
-                    // ...
-                   }).catch((error) => {
-                      // An error occurred
-                      const errorCode = error.code;
-                        const errorMessage = error.message;
-                // ..
-                        setErrorMsg(errorCode+"----"+errorMessage)
-                    // ...
-                  });
-                 
+                .then((userCredential) => {
+                    // Signed up
+                      
+                    const user = userCredential.user;
+                    updateProfile(user, {
+                        displayName: name.current.value, photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxRWsUV2-8W5E0tSmHMxiulei8obW1ilGB_A&usqp=CAU"
+                      }).then(() => {
+                          // Profile updated!
+                          const {uid,email,displayName,photoURL} = auth.currentUser;
+                          dispatch(addUser({
+                            uid:uid,email:email,displayName:displayName, photoURL: photoURL,
+                          }))
+                          navigate("/Browse") 
+                        // ...
+                      }).catch((error) => {
+                          // An error occurred
+                          setErrorMsg(error.message)
+                        // ...
+                      });
+                    console.log(user);
                     
-            })   
-            .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-                // ..
-            setErrorMsg(errorCode+"-"+errorMessage)
-             });
-        }
-        // Sign In Logic
-       else {signInWithEmailAndPassword(auth, email.current.value, password.current.value)
-            .then((userCredential) => {
-                     // Signed in 
-                const user = userCredential.user;
-                console.log(user)
-                navigate("/Browse")
-                    // ...
-                 })
-            .catch((error) => {
+                })
+                .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                setErrorMsg(errorCode + "-" + errorMessage)
-                console.log(error)
-                 });}
-    }
+                    setErrorMsg(errorCode+"-"+errorMessage)
+                    });
+
+            
+                           
+                
+        }
+        // Sign In Logic
+        else {
+            signInWithEmailAndPassword(auth, email.current.value, password.current.value)
+                    .then((userCredential) => {
+                        // Signed in 
+                        navigate("/Browse")
+                const user = userCredential.user;
+                     // ...
+                    })
+                .catch((error) => {
+                 const errorCode = error.code;
+                    const errorMessage = error.message;
+                    setErrorMsg(errorCode+"-"+errorMessage)
+                 });
+            
+          
+                
+                
+            // ...
+        }
+        
+    } 
     
    
     return (<div >
