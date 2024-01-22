@@ -2,7 +2,6 @@
 import { useRef, useState } from "react";
 import Header from "./Header";
 import isValid from "../utils/SignInValidation";
-import { useNavigate } from "react-router-dom";
 import { createUserWithEmailAndPassword , signInWithEmailAndPassword,updateProfile} from "firebase/auth";
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
@@ -14,7 +13,6 @@ import { addUser } from "../utils/userSlice";
 
 
 const Login = () => {
-    const navigate = useNavigate();
     const dispatch= useDispatch()
     const email=useRef(null);
     const password=useRef(null);
@@ -22,7 +20,7 @@ const Login = () => {
     const [isSignIn, setIsSignIn] = useState(true);
     const [errorMsg, setErrorMsg] = useState(null);
 
-    function toggleSignIn() {
+    const toggleSignIn=()=> {
         setIsSignIn(!isSignIn);
     }
     const handleClick = () => {
@@ -47,7 +45,7 @@ const Login = () => {
                           dispatch(addUser({
                             uid:uid,email:email,displayName:displayName, photoURL: photoURL,
                           }))
-                          navigate("/Browse") 
+                        //  navigate("/Browse") 
                         // ...
                       }).catch((error) => {
                           // An error occurred
@@ -72,8 +70,12 @@ const Login = () => {
             signInWithEmailAndPassword(auth, email.current.value, password.current.value)
                     .then((userCredential) => {
                         // Signed in 
-                        navigate("/Browse")
-                const user = userCredential.user;
+                        const user = userCredential.user;
+                        console.log(user)
+                        
+                       // navigate("/Browse")
+                        
+                        
                      // ...
                     })
                 .catch((error) => {
