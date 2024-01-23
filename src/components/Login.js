@@ -6,6 +6,9 @@ import { createUserWithEmailAndPassword , signInWithEmailAndPassword,updateProfi
 import { auth } from "../utils/firebase";
 import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
+import { BKG_IMG } from "../utils/constants";
+import{USER_ICON} from "../utils/constants"
+
 
 
 
@@ -38,7 +41,7 @@ const Login = () => {
                       
                     const user = userCredential.user;
                     updateProfile(user, {
-                        displayName: name.current.value, photoURL: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxRWsUV2-8W5E0tSmHMxiulei8obW1ilGB_A&usqp=CAU"
+                        displayName: name.current.value, photoURL: USER_ICON
                       }).then(() => {
                           // Profile updated!
                           const {uid,email,displayName,photoURL} = auth.currentUser;
@@ -95,7 +98,7 @@ const Login = () => {
    
     return (<div >
         <Header/> 
-        <div className="absolute "><img src="https://assets.nflxext.com/ffe/siteui/vlv3/594f8025-139a-4a35-b58d-4ecf8fdc507c/d3c4e455-f0bf-4003-b7cd-511dda6da82a/IN-en-20240108-popsignuptwoweeks-perspective_alpha_website_large.jpg" alt="bg-img" />
+        <div className="absolute "><img src={BKG_IMG} alt="bg-img" />
         </div>
         
             <form onSubmit={(e)=>e.preventDefault()} className="absolute my-36 mx-auto left-0 right-0 bg-black w-3/12 p-12 text-white rounded-lg bg-opacity-80">

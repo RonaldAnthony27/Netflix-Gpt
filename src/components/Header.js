@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
+import {LOGO} from"../utils/constants"
 
 import { useSelector } from "react-redux";
 const Header = () => { 
@@ -22,7 +23,7 @@ const Header = () => {
     }
     //all the routing(navigating to diff pages) for the app is done while auth state change of the app with the below code.
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
+        const unsubscribe=onAuthStateChanged(auth, (user) => {
           //if user Signs in/Signs Out
           if (user) {
             const { uid, email, displayName,photoURL } = user;
@@ -36,12 +37,13 @@ const Header = () => {
            
           }
         });
+        return () => unsubscribe();
         },[])
   
 
     return (
         <div className="absolute w-screen h-20 px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
-            <img className="w-40" src="https://cdn.cookielaw.org/logos/dd6b162f-1a32-456a-9cfe-897231c7763c/4345ea78-053c-46d2-b11e-09adaef973dc/Netflix_Logo_PMS.png"
+            <img className="w-40" src={LOGO}
                 alt="logo" />
             {user&&(<div className="flex justify-between">
                  <img className="rounded-md" src={user?.photoURL} alt="userLogo"/> 
