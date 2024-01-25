@@ -8,4 +8,6 @@ export const MOVIE_OPTIONS = {
       accept: 'application/json',
       Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2MTE0N2JiNjllYjk4NTUxYjc0YzhlMDU1ZDM2ZmI4OSIsInN1YiI6IjY1YWVjMmE3NTQ0YzQxMDBjYzNhNzk1MCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.cdwlybaPlh8aYfVkp8hM6eJ1pDmGxKWRFtIRB1sRJ2g'
     }
-  };
+};
+
+export const MOVIE_POSTER="https://image.tmdb.org/t/p/w500/"
