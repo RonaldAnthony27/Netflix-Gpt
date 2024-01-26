@@ -5,13 +5,16 @@ import { useEffect } from "react";
 import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { addUser, removeUser } from "../utils/userSlice";
-import {LOGO} from"../utils/constants"
-
+import { LOGO, SUPPORTED_LANGUAGES } from "../utils/constants"
 import { useSelector } from "react-redux";
+import { toggleGptSearchView } from "../utils/gptSlice";
+import { changeLaguage } from "../utils/configSlice";
 const Header = () => { 
     const dispatch=useDispatch()
     const navigate = useNavigate()
-    const user=useSelector(store=>store.user)
+    const user = useSelector(store => store.user)
+    const showGptSearch = useSelector(store => store.gpt.showGptSearch);
+    
     const handleClick=()=>{
         signOut(auth).then(() => {
             // Sign-out successful.
@@ -20,6 +23,12 @@ const Header = () => {
               // An error happened.
               //buid an error page navigate("/error")
           });
+    }
+    const handleGptSearch = () => {
+        dispatch(toggleGptSearchView())
+    }
+    const handleLangChange=(e)=>{
+       console.log(dispatch(changeLaguage(e.target.value)))
     }
     //all the routing(navigating to diff pages) for the app is done while auth state change of the app with the below code.
     useEffect(() => {
@@ -45,7 +54,16 @@ const Header = () => {
         <div className="absolute w-screen h-20 px-8 py-2 bg-gradient-to-b from-black z-10 flex justify-between">
             <img className="w-40" src={LOGO}
                 alt="logo" />
-            {user&&(<div className="flex justify-between">
+            {user && (<div className="flex justify-between">
+                {showGptSearch && <select className="p-2 m-2 text-white bg-gray-900 rounded-md" onChange={handleLangChange}>
+                    {SUPPORTED_LANGUAGES.map((lang) => (
+                        <option key={lang.identifier} value={lang.identifier}>
+                            {lang.name}
+                        </option>
+                    ))}
+                </select>}
+                <button className="p-2 m-2 text-white bg-purple-600 rounded-md " onClick={handleGptSearch}>
+                    { showGptSearch?"Home":"GPT Search"}</button>
                  <img className="rounded-md" src={user?.photoURL} alt="userLogo"/> 
                 <button className="p-2 m-2 text-white bg-red-700 rounded-md" onClick={handleClick} >Sign out</button>
          </div>)}
