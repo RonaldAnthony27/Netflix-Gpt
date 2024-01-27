@@ -8,7 +8,9 @@ const Body = () => {
         {path: "/",
         element:<Login/>,},
         {path: "/Browse",
-        element:<Browse/>,},
+            element: <Browse />,
+        },
+        
     ]);
   
     return (
