@@ -1,13 +1,19 @@
 import GptSearchBar from "./GptSearchBar";
 import GptSuggestions from "./GptSuggestions";
 import { BKG_IMG } from "../utils/constants";
+import { useSelector } from "react-redux";
+import { DesktopBrowseShimmer } from "./Shimmer";
 const GptSearch = () => {
+
     return (
         <div>
             <div className="fixed -z-20">
-            <img src={ BKG_IMG} alt="img"/>  </div>
+            <img className="h-screen md:h-auto object-cover" src={ BKG_IMG} alt="img"/>  </div>
+            <div className="">
             <GptSearchBar />
             <GptSuggestions/>
+           </div>
+            
        
         </div>
     )
