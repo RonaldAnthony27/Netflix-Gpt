@@ -8,8 +8,6 @@ const VideoTitle = ({ title, overview }) => {
     const handleclick = () => [
         navigate("/Browse/"+id)
     ]
-    console.log(id)
-    console.log("http://localhost:3000/Browse/"+id)
     
     return (
         <div className="pt-[15%] px-6 md:px-24 w-screen aspect-video absolute text-white bg-gradient-to-r from-black  ">
