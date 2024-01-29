@@ -2,6 +2,7 @@ import { Link } from "lucide-react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+
 const VideoTitle = ({ title, overview }) => {
     const id = useSelector((store) => store.movies?.nowPlayingMovies[0]?.id)
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ const VideoTitle = ({ title, overview }) => {
     
     return (
         <div className="pt-[15%] px-6 md:px-24 w-screen aspect-video absolute text-white bg-gradient-to-r from-black  ">
+           
             <h1 className="text-2xl md:text-6xl font-bold">{title}</h1>
             <p className="hidden md:inline-block py-6 text-lg w-1/4">{overview}</p>
             <div className="flex ">

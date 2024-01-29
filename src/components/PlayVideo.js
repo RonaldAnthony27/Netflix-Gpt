@@ -25,7 +25,7 @@ const PlayVideo = () => {
             video.type === "Featurette" ||
             video.type.toLowerCase().includes("trailer")
         );
-        console.log(jsondata)
+        //console.log(jsondata)
         filterVideodata?.length ? setMovieVideo(filterVideodata[0]) : setMovieVideo(jsondata?.results[0])
         
         

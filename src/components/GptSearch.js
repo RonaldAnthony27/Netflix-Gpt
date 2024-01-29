@@ -1,8 +1,7 @@
 import GptSearchBar from "./GptSearchBar";
 import GptSuggestions from "./GptSuggestions";
 import { BKG_IMG } from "../utils/constants";
-import { useSelector } from "react-redux";
-import { DesktopBrowseShimmer } from "./Shimmer";
+
 const GptSearch = () => {
 
     return (

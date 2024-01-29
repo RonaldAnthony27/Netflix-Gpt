@@ -4,10 +4,12 @@ import { useRef } from "react";
 import openai from "../utils/openai";
 import { MOVIE_OPTIONS } from "../utils/constants";
 import { addGptMovies } from "../utils/gptSlice";
+import Shimmer from "./Shimmer";
 const GptSearchBar = () => {
   const dispatch = useDispatch();
   const langKey = useSelector((store) => store.config.lang);
   const searchText = useRef(null);
+  
   const tmdbSearchResult = async (movie) => {
     const data = await fetch(
       "https://api.themoviedb.org/3/search/movie?&query=" + movie,
@@ -18,7 +20,8 @@ const GptSearchBar = () => {
   };
 
   const handleGptSearchClick = async () => {
-    console.log(searchText.current.value);
+  
+    
     //giving the context of query to Openai in order to get desired format result
     const gptQuery =
       "Act as a Movie Recommendation system and suggest some movies for the query: " +
@@ -65,6 +68,7 @@ const GptSearchBar = () => {
         >
           {lang[langKey].search}
         </button>
+      
       </form>
     </div>
   );

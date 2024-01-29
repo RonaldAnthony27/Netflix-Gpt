@@ -28,7 +28,7 @@ const Header = () => {
         dispatch(toggleGptSearchView())
     }
     const handleLangChange=(e)=>{
-       console.log(dispatch(changeLaguage(e.target.value)))
+       dispatch(changeLaguage(e.target.value))
     }
     //all the routing(navigating to diff pages) for the app is done while auth state change of the app with the below code.
     useEffect(() => {
