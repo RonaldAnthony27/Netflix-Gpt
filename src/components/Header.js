@@ -38,11 +38,11 @@ const Header = () => {
             const { uid, email, displayName,photoURL } = user;
             dispatch(addUser({uid:uid,email:email,displayName:displayName,photoURL:photoURL}))
             
-          navigate("/Browse")
+              navigate("/Browse");
           } else {
             // User is signed out
               dispatch(removeUser());
-              navigate("/")
+              navigate("/");
            
           }
         });

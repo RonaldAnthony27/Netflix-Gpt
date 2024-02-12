@@ -1,8 +1,6 @@
 import { useSelector } from "react-redux";
 import  VideoTitle  from "./VideoTitle";
 import VideoBackground from "./VideoBackground";
-import { HomeShimmer } from "./Shimmer";
-import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 
 

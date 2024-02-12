@@ -31,7 +31,6 @@ const Login = () => {
         setErrorMsg(msg)
         if (msg) {
             return; // if error return the user rom logging in
-        
         }
         // SignUp Logic
         if (!isSignIn) {

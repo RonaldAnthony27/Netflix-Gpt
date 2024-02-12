@@ -4,7 +4,6 @@ import { useRef } from "react";
 import openai from "../utils/openai";
 import { MOVIE_OPTIONS } from "../utils/constants";
 import { addGptMovies } from "../utils/gptSlice";
-import Shimmer from "./Shimmer";
 const GptSearchBar = () => {
   const dispatch = useDispatch();
   const langKey = useSelector((store) => store.config.lang);
