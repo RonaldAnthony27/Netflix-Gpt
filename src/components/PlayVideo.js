@@ -71,11 +71,7 @@ const PlayVideo = () => {
           </div>
         </div>
         <div className="bg-black">
-        <MovieList title={"Now Playing" } movies={movies.nowPlayingMovies} />     
-             <MovieList title={"Trending" } movies={movies.trendingMovies} />     
-             <MovieList title={"Popular" } movies={movies.popularMovies} />     
-             <MovieList title={"Top Rated" } movies={movies.topRatedMovies} />     
-             <MovieList title={"Upcoming" } movies={movies.upcomingMovies} />     
+          <MovieList title={"Recommended for you"} movies={movies.nowPlayingMovies} /> 
         </div>
       </div>
     </div>
